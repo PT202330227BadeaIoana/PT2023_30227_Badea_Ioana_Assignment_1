@@ -41,35 +41,10 @@ public class Operation {
 
     public Polynomial sub(Polynomial p1, Polynomial p2) {
         Polynomial result = new Polynomial();
-        for(Map.Entry<Integer, Monomial> entry1 :  p1.getPolinom().entrySet()) {
-            boolean found = false;
-            Monomial monomial = new Monomial();
-            for(Map.Entry<Integer, Monomial> entry2 : p2.getPolinom().entrySet()) {
-                if(entry1.getValue().getPower() == entry2.getValue().getPower()) {
-                    monomial.setPower(entry1.getValue().getPower());
-                    monomial.setCoefficient(entry1.getValue().getCoefficient()-entry2.getValue().getCoefficient());
-                    result.addMonom(monomial);
-                    found = true;
-                }
-            }
-            if(found==false) {
-                result.addMonom(entry1.getValue());
-            }
+        for(Map.Entry<Integer, Monomial> entry1 :  p2.getPolinom().entrySet()) {
+            entry1.getValue().setCoefficient((-1)*entry1.getValue().getCoefficient());
         }
-        for(Map.Entry<Integer, Monomial> entry2 : p2.getPolinom().entrySet()) {
-            boolean found = false;
-            Monomial monomial = new Monomial();
-            for(Map.Entry<Integer, Monomial> entry1 : p1.getPolinom().entrySet()) {
-                if(entry2.getValue().getPower() == entry1.getValue().getPower()) {
-                    found = true;
-                }
-            }
-            if(found==false) {
-                monomial.setPower(entry2.getValue().getPower());
-                monomial.setCoefficient((-1)*entry2.getValue().getCoefficient());
-                result.addMonom(monomial);
-            }
-        }
+        result=add(p1,p2);
         return result;
     }
 

@@ -31,11 +31,15 @@ public class Polynomial {
     public String toString() {
         String result="";
         for(Map.Entry<Integer, Monomial> entry1 :  polynomial.entrySet()) {
-            if(entry1.getKey() == maxKey(polynomial))
-                result += entry1.getValue().getCoefficient() + "*x^" + entry1.getValue().getPower();
-            else
-                result += entry1.getValue().getCoefficient() + "*x^" + entry1.getValue().getPower() + "+";
+            if(entry1.getValue().getCoefficient() != 0){
+                if(entry1.getKey() == maxKey(polynomial))
+                    result += entry1.getValue().getCoefficient() + "*x^" + entry1.getValue().getPower();
+                else
+                    result += entry1.getValue().getCoefficient() + "*x^" + entry1.getValue().getPower() + "+";
+            }
         }
+        if(result.equals(""))
+            result = "0";
         return result;
     }
 }
